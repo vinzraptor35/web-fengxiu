@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website By Feng</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background: #09070f;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        .panel {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(15, 12, 27, 0.9);
+            border: 2px solid #1f1938;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.2);
+            text-align: center;
+            z-index: 10;
+        }
+        .banner-box {
+            width: 100%;
+            height: 140px;
+            background: #130f24;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px dashed #3498db;
+            overflow: hidden;
+        }
+        .banner-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .banner-box span {
+            color: #5c527f;
+            font-size: 13px;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(54, 162, 235, 0.6);
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 11px;
+            color: #3498db;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        .row-inputs {
+            display: flex;
+            gap: 12px;
+        }
+        .row-inputs .input-group {
+            flex: 1;
+        }
+        label {
+            display: block;
+            font-size: 11px;
+            color: #8a81b5;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: #130f24;
+            border: 1px solid #292248;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #7209b7, #3498db);
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4);
+            margin-top: 10px;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .main-dashboard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+        .bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .dashboard-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 440px;
+            background: rgba(10, 8, 20, 0.85);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            margin: auto;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(114, 9, 183, 0.15);
+            border: 1px dashed #3498db;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
+        }
+        .url-display {
+            background: #130f24;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            word-break: break-all;
+            margin-bottom: 10px;
+            border: 1px solid #292248;
+            color: #00ffcc;
+        }
+        .watermark {
+            font-size: 10px;
+            color: #5c527f;
+            letter-spacing: 2px;
+            margin-top: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .target-profile {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            object-fit: cover;
+            margin: 0 auto 20px auto;
+            display: block;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+        }
+        .target-msg {
+            font-size: 17px;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 25px;
+        }
+        .emoji-box {
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+        
+        /* --- DESIGN TOMBOL SOSIAL MEDIA --- */
+        .social-btns {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        .btn-social {
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .btn-tele { background: #0088cc; }
+        .btn-wa { background: #25d366; }
+        .btn-social:hover { opacity: 0.85; transform: scale(1.05); }
+        .btn-social:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<!-- HALAMAN LOGIN -->
+<div class="panel" id="loginPanel">
+    <div class="banner-box">
+        <img src="https://d.top4top.io/p_38267qcid1.jpg" id="bannerImg" onerror="this.style.display='none'">
+        <span id="bannerText">TARUH URL GAMBAR BANNER DI SINI</span>
+    </div>
+    <h1>Website By Feng</h1>
+    <div class="subtitle">Sasuke Edition</div>
+    
+    <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" autocomplete="off">
+    </div>
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password">
+    </div>
+    
+    <button class="btn" onclick="prosesLogin()">Login To</button>
+    <div class="watermark">WEBSITE BY FENG</div>
+</div>
+
+<!-- CONTAINER VIDEO TRANSISI INTRO -->
+<div class="video-container" id="introContainer">
+    <video id="introVideo" playsinline>
+        <source src="https://j.top4top.io/m_3826xfc4x1.mp4" type="video/mp4">
+    </video>
+</div>
+
+<!-- DASHBOARD UTAMA GENERATOR -->
+<div class="main-dashboard" id="dashboardPanel">
+    <video class="bg-video" id="mainBgVideo" loop muted playsinline>
+        <source src="https://c.top4top.io/m_3826f29gd1.mp4" type="video/mp4">
+    </video>
+    
+    <div class="dashboard-content">
+        <h1 style="font-size: 22px;">Web Creator Panel</h1>
+        <div class="subtitle" style="margin-bottom: 20px;">Manual Kustomisasi</div>
+        
+        <div class="input-group">
+            <label>Masukkan Tema Web</label>
+            <input type="text" id="namaTema" placeholder="Contoh: birthday / bucin / surprise ayah / bebas">
+        </div>
+
+        <div class="row-inputs">
+            <div class="input-group">
+                <label>Background Web (URL)</label>
+                <input type="text" id="bgUrl" placeholder="Link Video / Foto">
+            </div>
+            <div class="input-group">
+                <label>Musik Web (URL MP3)</label>
+                <input type="text" id="musicUrl" placeholder="Link Tautan Audio">
+            </div>
+        </div>
+
+        <div class="row-inputs">
+            <div class="input-group">
+                <label>Foto Bulat (URL)</label>
+                <input type="text" id="imgUrl" placeholder="Link Foto Profil">
+            </div>
+            <div class="input-group">
+                <label>Emoji (Max 2)</label>
+                <input type="text" id="emojis" placeholder="Contoh: ❤️✨" maxlength="2">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Isi Teks / Pesan Ucapan</label>
+            <input type="text" id="pesanTeks" placeholder="Masukkan tulisan kustom...">
+        </div>
+        
+        <button class="btn" onclick="generateManualLink()">Generate Web Link</button>
+
+        <div class="result-box" id="resultBox">
+            <label style="color: #00ffcc;">🎉 Link Sukses Dibuat!</label>
+            <div class="url-display" id="urlDisplay"></div>
+            <button class="btn" style="padding: 8px; font-size: 12px; margin-top: 0;" onclick="copyUrl()">Salin Link</button>
+        </div>
+        
+        <div class="watermark">WEBSITE BY FENG</div>
+    </div>
+</div>
+
+<script>
+    function prosesLogin() {
+        const u = document.getElementById('username').value;
+        const p = document.getElementById('password').value;
+        
+        if (u === 'Raja FengXiu' && p === 'Ngocok dulu bos') {
+            document.getElementById('loginPanel').style.display = 'none';
+            const introContainer = document.getElementById('introContainer');
+            const introVideo = document.getElementById('introVideo');
+            
+            introContainer.style.display = 'flex';
+            introVideo.play();
+            
+            introVideo.onended = function() {
+                introContainer.style.display = 'none';
+                const dbPanel = document.getElementById('dashboardPanel');
+                dbPanel.style.display = 'flex';
+                document.getElementById('mainBgVideo').play();
+            };
+        } else {
+            alert('Username atau Password salah, King!');
+        }
+    }
+
+    function generateManualLink() {
+        const temaInput = document.getElementById('namaTema').value.trim();
+        const tema = temaInput.toLowerCase();
+        const bg = document.getElementById('bgUrl').value.trim();
+        const music = document.getElementById('musicUrl').value.trim();
+        const img = document.getElementById('imgUrl').value.trim();
+        const emo = document.getElementById('emojis').value.trim();
+        const msg = document.getElementById('pesanTeks').value.trim();
+
+        if (!temaInput) {
+            alert('Kolom tema wajib diisi, King!');
+            return;
+        }
+        if (!msg) {
+            alert('Kolom isi teks ucapan wajib diisi, King!');
+            return;
+        }
+
+        const cekMsg = msg.toLowerCase();
+        const cekBg = bg.toLowerCase();
+        const cekMusic = music.toLowerCase();
+
+        /* --- HYBRID SMART VARIABLE DETECTOR --- */
+        let isGakSinkron = false;
+
+        if (tema === 'birthday' || tema === 'hbd' || tema === 'ultah') {
+            if (cekMsg.includes('bucin') || cekMsg.includes('sayang') || cekMsg.includes('love') || cekMsg.includes('birahi') || cekMsg.includes('sange') || cekMsg.includes('maaf') ||
+                cekBg.includes('bucin') || cekMusic.includes('romance') || 
+                (!cekMsg.includes('birthday') && !cekMsg.includes('hbd') && !cekMsg.includes('ultah') && !cekMsg.includes('selamat'))) {
+                isGakSinkron = true;
+            }
+        } 
+        else if (tema === 'bucin' || tema === 'love' || tema === 'pacar') {
+            if (cekMsg.includes('birthday') || cekMsg.includes('hbd') || cekMsg.includes('ultah') || cekMsg.includes('maaf') || cekMsg.includes('sorry') ||
+                cekBg.includes('birthday') || cekMusic.includes('ultah') ||
+                (!cekMsg.includes('sayang') && !cekMsg.includes('bucin') && !cekMsg.includes('love') && !cekMsg.includes('kangen') && !cekMsg.includes('cinta'))) {
+                isGakSinkron = true;
+            }
+        }
+        else if (tema === 'birahi' || tema === 'cari pacar' || tema === 'cp' || tema === 'sange') {
+            if (cekMsg.includes('birthday') || cekMsg.includes('hbd') || cekMsg.includes('ultah') || cekMsg.includes('maaf') ||
+                cekBg.includes('birthday') || cekMusic.includes('ultah')) {
+                isGakSinkron = true;
+            }
+        }
+        else if (tema === 'permohonan maaf' || tema === 'maaf sayang' || tema === 'maaf' || tema === 'apology') {
+            if (cekMsg.includes('birthday') || cekMsg.includes('hbd') || cekMsg.includes('ultah') ||
+                cekBg.includes('birthday') || cekMusic.includes('ultah') ||
+                (!cekMsg.includes('maaf') && !cekMsg.includes('sorry') && !cekMsg.includes('ampun') && !cekMsg.includes('salah') && !cekMsg.includes('maafin'))) {
+                isGakSinkron = true;
+            }
+        }
+        else {
+            if ((tema.includes('ayah') || tema.includes('ibu') || tema.includes('mama') || tema.includes('papa') || tema.includes('surprise')) && 
+                (cekMsg.includes('sange') || cekMsg.includes('birahi'))) {
+                isGakSinkron = true;
+            }
+        }
+
+        if (isGakSinkron) {
+            alert(`Lu tulis tema "${temaInput}" ini nya tapi lu malah masukin Url/tema yang lain bego lu tololll`);
+            return;
+        }
+
+        const encodedTema = encodeURIComponent(temaInput);
+        const encodedBg = encodeURIComponent(bg);
+        const encodedMusic = encodeURIComponent(music);
+        const encodedImg = encodeURIComponent(img);
+        const encodedEmo = encodeURIComponent(emo);
+        const encodedMsg = encodeURIComponent(msg);
+
+        const baseUrl = window.location.href.split('?')[0];
+        const finalUrl = `${baseUrl}?tm=${encodedTema}&bg=${encodedBg}&music=${encodedMusic}&img=${encodedImg}&emo=${encodedEmo}&msg=${encodedMsg}`;
+
+        document.getElementById('urlDisplay').innerText = finalUrl;
+        document.getElementById('resultBox').style.display = 'block';
+    }
+
+    function copyUrl() {
+        const text = document.getElementById('urlDisplay').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Link berhasil disalin, King!');
+        });
+    }
+
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tm = urlParams.get('tm');
+        const bg = urlParams.get('bg');
+        const music = urlParams.get('music');
+        const img = urlParams.get('img');
+        const emo = urlParams.get('emo');
+        const msg = urlParams.get('msg');
+
+        if (msg) {
+            document.getElementById('loginPanel').style.display = 'none';
+            document.getElementById('introContainer').style.display = 'none';
+            document.getElementById('dashboardPanel').style.display = 'none';
+
+            let backgroundHTML = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a051b;z-index:1;"></div>`;
+            if (bg) {
+                const decodedBg = decodeURIComponent(bg);
+                if (decodedBg.includes('.mp4')) {
+                    backgroundHTML = `<video autoplay loop muted playsinline style="position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;"><source src="${decodedBg}" type="video/mp4"></video>`;
+                } else {
+                    backgroundHTML = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:url('${decodedBg}') no-repeat center center/cover;z-index:1;"></div>`;
+                }
+            }
+
+            let audioHTML = '';
+            if (music) {
+                audioHTML = `<audio autoplay loop id="bgAudio"><source src="${decodeURIComponent(music)}" type="audio/mpeg"></audio>`;
+            }
+
+            let imgHTML = '';
+            if (img) {
+                imgHTML = `<img src="${decodeURIComponent(img)}" class="target-profile">`;
+            }
+
+            let emoHTML = '';
+            if (emo) {
+                emoHTML = `<div class="emoji-box">${decodeURIComponent(emo)}</div>`;
+            }
+
+            document.body.innerHTML = `
+                ${backgroundHTML}
+                ${audioHTML}
+                <div class="panel" style="position:relative;z-index:5;background:rgba(10,7,22,0.8);border:1px solid rgba(52,152,219,0.4);backdrop-filter:blur(10px);">
+                    ${imgHTML}
+                    <div class="target-msg">"${decodeURIComponent(msg)}"</div>
+                    ${emoHTML}
+                    
+                    <!-- TOMBOL SOSIAL MEDIA MENUJU TELEGRAM DAN WHATSAPP LU -->
+                    <div class="social-btns">
+                        <a href="https://t.me/IkyyRowr" target="_blank" class="btn-social btn-tele">Telegram</a>
+                        <a href="https://wa.me/6285242556628" target="_blank" class="btn-social btn-wa">WhatsApp</a>
+                    </div>
+
+                    <div class="watermark" style="margin-top:35px;color:#49406e;">WEBSITE BY FENG</div>
+                </div>
+            `;
+
+            document.body.addEventListener('click', function() {
+                const audio = document.getElementById('bgAudio');
+                if (audio) audio.play();
+            }, { once: true });
+        }
+    }
+</script>
+
+</body>
+</html>
