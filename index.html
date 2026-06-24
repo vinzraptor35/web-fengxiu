@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website By Feng</title>
+    <title>Databse By Feng</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -50,10 +49,6 @@
             height: 100%;
             object-fit: cover;
         }
-        .banner-box span {
-            color: #5c527f;
-            font-size: 13px;
-        }
         h1 {
             font-size: 24px;
             font-weight: 800;
@@ -74,13 +69,6 @@
             text-align: left;
             margin-bottom: 15px;
         }
-        .row-inputs {
-            display: flex;
-            gap: 12px;
-        }
-        .row-inputs .input-group {
-            flex: 1;
-        }
         label {
             display: block;
             font-size: 11px;
@@ -90,7 +78,7 @@
             margin-bottom: 6px;
             font-weight: 600;
         }
-        input, textarea {
+        input {
             width: 100%;
             padding: 12px 16px;
             background: #130f24;
@@ -101,7 +89,7 @@
             outline: none;
             transition: all 0.3s;
         }
-        input:focus, textarea:focus {
+        input:focus {
             border-color: #3498db;
             box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
         }
@@ -120,8 +108,10 @@
             box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4);
             margin-top: 10px;
         }
-        .btn:active {
-            transform: scale(0.98);
+        .btn:disabled {
+            background: #444;
+            box-shadow: none;
+            cursor: not-allowed;
         }
         .social-btns {
             display: flex;
@@ -144,7 +134,6 @@
         }
         .btn-wa { background: #25d366; }
         .btn-tele { background: #0088cc; }
-        .btn-social:hover { opacity: 0.85; transform: scale(1.03); }
 
         .video-container {
             position: fixed;
@@ -197,25 +186,6 @@
             backdrop-filter: blur(10px);
             margin: auto;
         }
-        .result-box {
-            margin-top: 20px;
-            padding: 12px;
-            background: rgba(114, 9, 183, 0.15);
-            border: 1px dashed #3498db;
-            border-radius: 8px;
-            display: none;
-            text-align: left;
-        }
-        .url-display {
-            background: #130f24;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            word-break: break-all;
-            margin-bottom: 10px;
-            border: 1px solid #292248;
-            color: #00ffcc;
-        }
         .watermark {
             font-size: 10px;
             color: #5c527f;
@@ -225,50 +195,16 @@
             text-transform: uppercase;
             text-align: center;
         }
-        
-        /* --- ANIMASI EMOJI TERBANG KE ATAS --- */
-        .emoji-fly { 
-            position: fixed; 
-            bottom: -50px; 
-            pointer-events: none; 
-            animation: flyUp 4s linear infinite; 
-            opacity: 0.85; 
-            z-index: 2; 
-        }
-        @keyframes flyUp {
-            0% { transform: translateY(0) scale(0.6) rotate(0deg); opacity: 0; }
-            15% { opacity: 1; }
-            85% { opacity: 1; }
-            100% { transform: translateY(-110vh) scale(1.3) rotate(360deg); opacity: 0; }
-        }
-        .box-container { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; z-index: 5; position: relative; }
-        .card-target { background: rgba(15, 15, 15, 0.75); backdrop-filter: blur(12px); border-radius: 20px; padding: 35px 25px; width: 85%; max-width: 380px; text-align: center; color: white; border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 0 25px rgba(255, 105, 180, 0.6); position: relative; box-sizing: border-box; animation: fadeIn 0.5s ease; }
-        .card-target::before, .card-target::after { content: ''; position: absolute; width: 12px; height: 12px; border: 2px solid #ffb6c1; }
-        .card-target::before { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
-        .card-target::after { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-        .foto-profil { width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; object-fit: cover; margin-bottom: 20px; box-shadow: 0 0 10px rgba(255,255,255,0.5); margin-left: auto; margin-right: auto; display: block; }
-        .target-msg { font-size: 15px; line-height: 1.6; opacity: 0.95; min-height: 45px; margin-bottom: 15px; word-wrap: break-word; text-align: center; }
-        .wrapper-input { display: none; margin-top: 15px; animation: fadeIn 0.5s ease; }
-        .btn-action { display: inline-block; background-color: #ff4757; color: white; padding: 12px 28px; font-weight: 600; text-decoration: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4); transition: 0.3s; margin-top: 15px; cursor: pointer; border: none; font-size: 15px; width: 100%; text-transform: uppercase; }
-        .btn-action:hover { transform: scale(1.05); background-color: #ff2a3a; }
-        .btn-action-wa { background-color: #25d366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
-        .btn-action-wa:hover { background-color: #20ba5a; }
-        .svg-icon { width: 80px; height: 80px; margin: 10px auto 20px auto; fill: #ffb6c1; display: block; animation: pulse 2s infinite; filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.6)); }
-
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<!-- PANEL LOGIN -->
 <div class="panel" id="loginPanel">
     <div class="banner-box">
-        <img src="https://d.top4top.io/p_38267qcid1.jpg" id="bannerImg" onerror="this.style.display='none'">
-        <span id="bannerText">SANG RAJA FENGXIU</span>
+        <img src="https://d.top4top.io/p_38267qcid1.jpg">
     </div>
-    <h1>Website By Feng</h1>
-    <div class="subtitle">Sasuke Edition</div>
+    <h1>Database By Feng</h1>
+    <div class="subtitle">Sasuke Database</div>
     
     <div class="input-group">
         <label>Username</label>
@@ -281,88 +217,52 @@
     
     <button class="btn" onclick="prosesLogin()">Login To</button>
 
-    <!-- TOMBOL TELEGRAM DAN WHATSAPP DI BAWAH LOGIN TO (SESUAI GAMBAR 1002051407.jpg) -->
     <div class="social-btns">
         <a href="https://wa.me/6285242556628" target="_blank" class="btn-social btn-wa">WhatsApp</a>
         <a href="https://t.me/IkyyRowr" target="_blank" class="btn-social btn-tele">Telegram</a>
     </div>
 
-    <div class="watermark">WEBSITE BY FENG</div>
+    <div class="watermark">DATABASE BY FENG</div>
 </div>
 
-<!-- TRANSISI INTRO VIDEO -->
 <div class="video-container" id="introContainer">
     <video id="introVideo" playsinline>
         <source src="https://j.top4top.io/m_3826xfc4x1.mp4" type="video/mp4">
     </video>
 </div>
 
-<!-- CREATOR PANEL DASHBOARD -->
 <div class="main-dashboard" id="dashboardPanel">
     <video class="bg-video" id="mainBgVideo" loop muted playsinline>
         <source src="https://c.top4top.io/m_3826f29gd1.mp4" type="video/mp4">
     </video>
     
     <div class="dashboard-content">
-        <h1 style="font-size: 22px;">Web Creator Panel</h1>
-        <div class="subtitle" style="margin-bottom: 20px;">Manual Kustomisasi</div>
+        <h1>Sasuke Database</h1>
+        <div class="subtitle" style="margin-bottom: 20px;">Masukkan Nomor Terbaru</div>
         
         <div class="input-group">
-            <label>Masukkan Tema Web</label>
-            <input type="text" id="namaTema" placeholder="Contoh: birthday / bucin / surprise ayah / bebas">
-        </div>
-
-        <div class="row-inputs">
-            <div class="input-group">
-                <label>Background Web (URL)</label>
-                <input type="text" id="bgUrl" placeholder="Link Video / Foto">
-            </div>
-            <div class="input-group">
-                <label>Musik Web (URL MP3)</label>
-                <input type="text" id="musicUrl" placeholder="Link Tautan Audio">
-            </div>
-        </div>
-
-        <div class="row-inputs">
-            <div class="input-group">
-                <label>Foto Bulat (URL)</label>
-                <input type="text" id="imgUrl" placeholder="Link Foto Profil">
-            </div>
-            <div class="input-group">
-                <label>Emoji Terbang (Max 2)</label>
-                <input type="text" id="emojis" placeholder="Contoh: ❤️✨" maxlength="2">
-            </div>
-        </div>
-
-        <!-- INPUT SINKRONISASI KECEPATAN TEKS -->
-        <div class="input-group">
-            <label>Kecepatan Ketik Teks (ms)</label>
-            <input type="number" id="speedTeks" placeholder="Makin kecil makin cepat (Contoh: 50)" value="50">
-        </div>
-
-        <div class="input-group">
-            <label>Isi Teks / Pesan Ucapan</label>
-            <textarea id="pesanTeks" style="height: 70px; resize: none;" placeholder="Masukkan tulisan kustom..."></textarea>
+            <label>Nomor WhatsApp Baru</label>
+            <input type="number" id="nomorBaru" placeholder="Contoh: 6281356165300" style="text-align: center; font-size: 16px; letter-spacing: 1px;">
         </div>
         
-        <button class="btn" onclick="generateManualLink()">Generate Web Link</button>
-
-        <div class="result-box" id="resultBox">
-            <label style="color: #00ffcc;">🎉 Link Sukses Dibuat!</label>
-            <div class="url-display" id="urlDisplay"></div>
-            <button class="btn" style="padding: 8px; font-size: 12px; margin-top: 0;" onclick="copyUrl()">Salin Link</button>
-        </div>
+        <button class="btn" id="btnKirimDb" onclick="simpanKeGitHubRepo()">ADD DATABASE</button>
         
-        <div class="watermark">WEBSITE BY FENG</div>
+        <div class="watermark">DATABASE BY FENG</div>
     </div>
 </div>
 
 <script>
+    const CONFIG_GH = {
+        token: "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",
+        username: "vinzraptor35",
+        repository: "Database_web"
+    };
+
     function prosesLogin() {
         const u = document.getElementById('username').value;
         const p = document.getElementById('password').value;
         
-        if (u === 'Raja FengXiu' && p === 'Ngocok dulu bos') {
+        if (u === 'Raja FengXiu' && p === 'databse feng') {
             document.getElementById('loginPanel').style.display = 'none';
             const introContainer = document.getElementById('introContainer');
             const introVideo = document.getElementById('introVideo');
@@ -381,191 +281,72 @@
         }
     }
 
-    function generateManualLink() {
-        const temaInput = document.getElementById('namaTema').value.trim();
-        const bg = document.getElementById('bgUrl').value.trim();
-        const music = document.getElementById('musicUrl').value.trim();
-        const img = document.getElementById('imgUrl').value.trim();
-        const emo = document.getElementById('emojis').value.trim();
-        const msg = document.getElementById('pesanTeks').value.trim();
-        const speed = document.getElementById('speedTeks').value.trim() || '50';
+    function simpanKeGitHubRepo() {
+        const nomor = document.getElementById('nomorBaru').value.trim();
+        const btn = document.getElementById('btnKirimDb');
 
-        if (!temaInput) { alert('Kolom tema wajib diisi, King!'); return; }
-        if (!msg) { alert('Kolom isi teks ucapan wajib diisi, King!'); return; }
+        if (!nomor) { alert('Masukkan nomor WhatsApp terlebih dahulu, King!'); return; }
 
-        const dataObjek = {
-            tm: temaInput,
-            bg: bg,
-            ms: music,
-            im: img,
-            em: emo,
-            tx: msg,
-            sp: speed
-        };
-        
-        const jsonString = JSON.stringify(dataObjek);
-        const stringPendek = btoa(encodeURIComponent(jsonString));
+        btn.innerText = "STORING TO GITHUB...";
+        btn.disabled = true;
 
-        const baseUrl = window.location.href.split('?')[0];
-        const finalUrl = `${baseUrl}?p=${stringPendek}`;
+        const urlApi = `https://api.github.com/repos/${CONFIG_GH.username}/${CONFIG_GH.repository}/contents/database.json`;
 
-        document.getElementById('urlDisplay').innerText = finalUrl;
-        document.getElementById('resultBox').style.display = 'block';
-    }
+        fetch(urlApi, {
+            headers: { 'Authorization': `token ${CONFIG_GH.token}` }
+        })
+        .then(res => res.json())
+        .then(fileData => {
+            let currentObj = { nomer: [] };
+            let currentSha = fileData.sha || '';
+            
+            if (fileData.content) {
+                try {
+                    currentObj = JSON.parse(atob(fileData.content));
+                } catch(e) { currentObj = { nomer: [] }; }
+            }
 
-    function copyUrl() {
-        const text = document.getElementById('urlDisplay').innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Link berhasil disalin, King!');
+            if (!currentObj.nomer || !Array.isArray(currentObj.nomer)) {
+                currentObj.nomer = [];
+            }
+
+            if (!currentObj.nomer.includes(nomor)) {
+                currentObj.nomer.push(nomor);
+            }
+
+            const updatePayload = {
+                message: "Add new number to array database via Web Sasuke Panel",
+                content: btoa(JSON.stringify(currentObj, null, 2)),
+                sha: currentSha
+            };
+
+            return fetch(urlApi, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${CONFIG_GH.token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatePayload)
+                    });
+                })
+        .then(res => {
+            if(res.ok) {
+                alert('🔥 Sukses! Nomor baru berhasil ditambahkan ke database GitHub.');
+                document.getElementById('nomorBaru').value = '';
+            } else {
+                alert('Gagal memperbarui database, cek kembali Token GitHub lu King.');
+            }
+            btn.innerText = "ADD DATABASE";
+            btn.disabled = false;
+        })
+        .catch(() => {
+            alert('Terjadi kendala koneksi ke API GitHub.');
+            btn.innerText = "ADD DATABASE";
+            btn.disabled = false;
         });
-    }
-
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const dataPendek = urlParams.get('p');
-
-        if (dataPendek) {
-            document.getElementById('loginPanel').style.display = 'none';
-            document.getElementById('introContainer').style.display = 'none';
-            document.getElementById('dashboardPanel').style.display = 'none';
-
-            let dataDecoded = {};
-            try {
-                const jsonString = decodeURIComponent(atob(dataPendek));
-                dataDecoded = JSON.parse(jsonString);
-            } catch (e) {
-                alert("Link rusak atau tidak valid, King!");
-                return;
-            }
-
-            const tm = dataDecoded.tm || 'bucin';
-            const bg = dataDecoded.bg || '';
-            const music = dataDecoded.ms || '';
-            const img = dataDecoded.im || '';
-            const emo = dataDecoded.em || '❤️'; 
-            const msg = dataDecoded.tx || '';
-            const sp = parseInt(dataDecoded.sp) || 55;
-
-            // ANIMASI EMOJI TERBANG SEJAK AWAL
-            const listEmoji = Array.from(emo);
-            setInterval(() => {
-                const randomEmoji = listEmoji[Math.floor(Math.random() * listEmoji.length)];
-                const emojiEl = document.createElement('div');
-                emojiEl.className = 'emoji-fly';
-                emojiEl.innerHTML = randomEmoji;
-                emojiEl.style.left = Math.random() * 100 + 'vw';
-                emojiEl.style.fontSize = (Math.random() * 20 + 24) + 'px';
-                emojiEl.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                document.body.appendChild(emojiEl);
-                setTimeout(() => { emojiEl.remove(); }, 4000);
-            }, 300);
-
-            let backgroundHTML = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0a051b;z-index:1;"></div>`;
-            if (bg) {
-                if (bg.includes('.mp4')) {
-                    backgroundHTML = `<video autoplay loop muted playsinline style="position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;"><source src="${bg}" type="video/mp4"></video>`;
-                } else {
-                    backgroundHTML = `<div style="position:fixed;top:0;left:0;width:100%;height:100%;background:url('${bg}') no-repeat center center/cover;z-index:1;"></div>`;
-                }
-            }
-
-            let audioHTML = music ? `<audio id="suaraBucin" loop><source src="${music}" type="audio/mpeg"></audio>` : '';
-            let imgHTML = img ? `<img src="${img}" class="foto-profil">` : '';
-
-            let judulStep1 = "Ada Pesan Spesial ✨";
-            let subStep1 = "Seseorang telah mengirimkan sebuah amplop rahasia penuh makna khusus buat kamu.";
-            let judulStep2 = "Ada Surat untuk Mu ✉";
-            let subStep2 = "Silakan klik tombol di bawah untuk membaca pesan terdalam dariku secara langsung.";
-
-            if(tm.toLowerCase() === 'birthday' || tm.toLowerCase() === 'hbd' || tm.toLowerCase() === 'ultah') {
-                judulStep1 = "Selamat Hari Spesial! 🎉";
-                subStep1 = "Ada kejutan kado ucapan digital menantimu di dalam amplop ini.";
-                judulStep2 = "Buka Kado Ucapan 🎁";
-                subStep2 = "Klik tombol di bawah untuk melihat untaian doa dan selamat dariku.";
-            } else if(tm.toLowerCase() === 'maaf' || tm.toLowerCase() === 'apology') {
-                judulStep1 = "Pesan Tulus Dari Lubuk Hati 🙏";
-                subStep1 = "Ada sebuah ungkapan penting yang ingin kusampaikan padamu.";
-                judulStep2 = "Buka Surat Permohonan ✉";
-                subStep2 = "Luangkan waktu sejenak untuk membaca pesan ini secara langsung.";
-            }
-
-            document.body.innerHTML = `
-                ${backgroundHTML}
-                ${audioHTML}
-                <div class="box-container">
-                    <!-- STEP 1: AMPLOP -->
-                    <div class="card-target" id="boxStep1" style="z-index:10;">
-                        <svg class="svg-icon" viewBox="0 0 24 24">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        <h1>${judulStep1}</h1>
-                        <p style="margin-bottom: 20px; font-size: 14px; line-height: 1.6; opacity: 0.9;">${subStep1}</p>
-                        <button onclick="actionStep1()" class="btn-action">Buka Amplop 📩</button>
-                    </div>
-
-                    <!-- STEP 2: SURAT -->
-                    <div class="card-target" id="boxStep2" style="display: none; z-index:10;">
-                        <svg class="svg-icon" viewBox="0 0 24 24">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-6.01 14.04c-.38.33-.87.49-1.37.46-.53-.03-1.01-.28-1.33-.67L5.5 11l1.41-1.41 3.51 3.51L17.09 6.5l1.41 1.41-5.51 9.13z"/>
-                        </svg>
-                        <h1>${judulStep2}</h1>
-                        <p style="margin-bottom: 20px; font-size: 14px; line-height: 1.6; opacity: 0.9;">${subStep2}</p>
-                        <button onclick="actionStep2()" class="btn-action">Buka Surat 💌</button>
-                    </div>
-
-                    <!-- STEP 3: ISI PESAN DAN BALAS -->
-                    <div class="card-target" id="boxStep3" style="display: none; z-index:10;">
-                        ${imgHTML}
-                        <h1 style="font-size: 20px; margin-bottom: 15px;">Special For You</h1>
-                        <div class="target-msg"><span id="ketikTeks"></span></div>
-                        
-                        <div class="wrapper-input" id="areaBalas">
-                            <textarea id="pesanUser" style="width: 100%; height: 75px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.15); color: white; padding: 12px; resize: none; outline: none; text-align: center; font-size: 14px; box-sizing: border-box;" placeholder="Tulis kesan pesan balasanmu di sini..."></textarea>
-                            <button onclick="kirimKeWA()" class="btn-action btn-action-wa">Balas Ke WhatsApp 📩</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            window.actionStep1 = function() {
-                document.getElementById('boxStep1').style.display = 'none';
-                document.getElementById('boxStep2').style.display = 'block';
-            };
-
-            // LAGU BERPUTAR DISINI SINKRON DENGAN SPEED TYPED.JS
-            window.actionStep2 = function() {
-                const audio = document.getElementById('suaraBucin');
-                if (audio) {
-                    audio.play().catch(e => console.log("Gagal mutar audio:", e));
-                }
-                
-                document.getElementById('boxStep2').style.display = 'none';
-                document.getElementById('boxStep3').style.display = 'block';
-                
-                new Typed('#ketikTeks', {
-                    strings: [msg],
-                    typeSpeed: sp,
-                    loop: false,
-                    showCursor: true,
-                    cursorChar: '|',
-                    onComplete: () => {
-                        document.getElementById('areaBalas').style.display = 'block';
-                    }
-                });
-            };
-
-            window.kirimKeWA = function() {
-                const isiPesan = document.getElementById('pesanUser').value.trim();
-                if (!isiPesan) {
-                    alert('Tulis kesan & pesannya dulu dong! 🥺');
-                    return;
-                }
-                const formatSms = `Halo Raja FengXiu!\n\nIni kesan & pesan dari gw:\n\n"${isiPesan}"`;
-                window.location.href = "https://wa.me/6285242556628?text=" + encodeURIComponent(formatSms);
-            };
-        }
     }
 </script>
 
 </body>
 </html>
+                    
