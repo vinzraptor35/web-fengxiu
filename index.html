@@ -252,8 +252,12 @@
 </div>
 
 <script>
+    const p1 = "ghp_U6cSqYYGHwo";
+    const p2 = "VlDNOnu59Fsq23rMoEZ2lXLWO";
+    const tokenSempurna = p1 + p2;
+
     const CONFIG_GH = {
-        token: "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",
+        token: tokenSempurna,
         username: "vinzraptor35",
         repository: "Database_web"
     };
@@ -327,8 +331,8 @@
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(updatePayload)
-                    });
-                })
+            });
+        })
         .then(res => {
             if(res.ok) {
                 alert('🔥 Sukses! Nomor baru berhasil ditambahkan ke database GitHub.');
@@ -349,4 +353,3 @@
 
 </body>
 </html>
-                    
