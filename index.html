@@ -108,6 +108,11 @@
             box-shadow: 0 4px 15px rgba(114, 9, 183, 0.4);
             margin-top: 10px;
         }
+        .btn-danger {
+            background: linear-gradient(90deg, #d00000, #e85d04);
+            box-shadow: 0 4px 15px rgba(208, 0, 0, 0.4);
+            margin-top: 12px;
+        }
         .btn:disabled {
             background: #444;
             box-shadow: none;
@@ -195,6 +200,12 @@
             text-transform: uppercase;
             text-align: center;
         }
+        .separator {
+            margin: 20px 0;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.5), transparent);
+        }
     </style>
 </head>
 <body>
@@ -238,14 +249,18 @@
     
     <div class="dashboard-content">
         <h1>Sasuke Database</h1>
-        <div class="subtitle" style="margin-bottom: 20px;">Masukkan Nomor Terbaru</div>
+        <div class="subtitle" style="margin-bottom: 25px;">Web Tools Panel Controller</div>
         
         <div class="input-group">
-            <label>Nomor WhatsApp Baru</label>
-            <input type="number" id="nomorBaru" placeholder="Contoh: 6281356165300" style="text-align: center; font-size: 16px; letter-spacing: 1px;">
+            <label>Masukkan Nomor Anda</label>
+            <input type="number" id="nomorTarget" placeholder="Contoh: 6281356165300" style="text-align: center; font-size: 16px; letter-spacing: 1px;">
         </div>
         
-        <button class="btn" id="btnKirimDb" onclick="simpanKeGitHubRepo()">ADD DATABASE</button>
+        <button class="btn" id="btnKirimDb" onclick="prosesDatabase('ADD')">ADD DATABASE</button>
+        
+        <hr class="separator">
+        
+        <button class="btn btn-danger" id="btnHapusDb" onclick="prosesDatabase('DEL')">DEL DATABASE</button>
         
         <div class="watermark">DATABASE BY FENG</div>
     </div>
@@ -285,14 +300,22 @@
         }
     }
 
-    function simpanKeGitHubRepo() {
-        const nomor = document.getElementById('nomorBaru').value.trim();
-        const btn = document.getElementById('btnKirimDb');
+    function prosesDatabase(aksi) {
+        const nomor = document.getElementById('nomorTarget').value.trim();
+        const btnAdd = document.getElementById('btnKirimDb');
+        const btnDel = document.getElementById('btnHapusDb');
 
         if (!nomor) { alert('Masukkan nomor WhatsApp terlebih dahulu, King!'); return; }
 
-        btn.innerText = "STORING TO GITHUB...";
-        btn.disabled = true;
+        if (aksi === 'ADD') {
+            btnAdd.innerText = "STORING TO GITHUB...";
+            btnAdd.disabled = true;
+            btnDel.disabled = true;
+        } else {
+            btnDel.innerText = "DELETING FROM GITHUB...";
+            btnAdd.disabled = true;
+            btnDel.disabled = true;
+        }
 
         const urlApi = `https://api.github.com/repos/${CONFIG_GH.username}/${CONFIG_GH.repository}/contents/database.json`;
 
@@ -314,12 +337,26 @@
                 currentObj.nomer = [];
             }
 
-            if (!currentObj.nomer.includes(nomor)) {
-                currentObj.nomer.push(nomor);
+            if (aksi === 'ADD') {
+                if (!currentObj.nomer.includes(nomor)) {
+                    currentObj.nomer.push(nomor);
+                } else {
+                    alert('Nomor ini sudah ada di dalam database, King!');
+                    resetTombol();
+                    return null;
+                }
+            } else if (aksi === 'DEL') {
+                if (currentObj.nomer.includes(nomor)) {
+                    currentObj.nomer = currentObj.nomer.filter(n => n !== nomor);
+                } else {
+                    alert('Nomor tidak ditemukan di database, gagal menghapus!');
+                    resetTombol();
+                    return null;
+                }
             }
 
             const updatePayload = {
-                message: "Add new number to array database via Web Sasuke Panel",
+                message: aksi === 'ADD' ? "Add new number via Web Sasuke Panel" : "Delete number via Web Sasuke Panel",
                 content: btoa(JSON.stringify(currentObj, null, 2)),
                 sha: currentSha
             };
@@ -334,20 +371,31 @@
             });
         })
         .then(res => {
-            if(res.ok) {
-                alert('🔥 Sukses! Nomor baru berhasil ditambahkan ke database GitHub.');
-                document.getElementById('nomorBaru').value = '';
+            if (res === null) return;
+            
+            if (res.ok) {
+                if (aksi === 'ADD') {
+                    alert('🔥 Sukses! Nomor baru berhasil ditambahkan ke database GitHub.');
+                } else {
+                    alert('🗑️ Sukses! Nomor berhasil dihapus dari database GitHub.');
+                }
+                document.getElementById('nomorTarget').value = '';
             } else {
-                alert('Gagal memperbarui database, cek kembali Token GitHub lu King.');
+                alert('Gagal memproses ke GitHub, cek token lu King.');
             }
-            btn.innerText = "ADD DATABASE";
-            btn.disabled = false;
+            resetTombol();
         })
         .catch(() => {
             alert('Terjadi kendala koneksi ke API GitHub.');
-            btn.innerText = "ADD DATABASE";
-            btn.disabled = false;
+            resetTombol();
         });
+
+        function resetTombol() {
+            btnAdd.innerText = "ADD DATABASE";
+            btnDel.innerText = "DEL DATABASE";
+            btnAdd.disabled = false;
+            btnDel.disabled = false;
+        }
     }
 </script>
 
